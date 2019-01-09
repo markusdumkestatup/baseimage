@@ -19,14 +19,15 @@ RUN chmod 700 private
 RUN touch index.txt
 RUN echo 1000 > serial
 COPY openssl.cnf /root/ca/
+chmod 400 private/ca.key.pem
 
 RUN cd /root/ca
-# RUN openssl genrsa -aes256 -out private/ca.key.pem 4096
+# RUN openssl genrsa -aes256 -out private/ca.key.pem 4096  # openssl genrsa -out private/ca.key.pem 4096
 
 # Enter pass phrase for ca.key.pem: secretpassword
 # Verifying - Enter pass phrase for ca.key.pem: secretpassword
 
-RUN chmod 400 private/ca.key.pem
+# RUN chmod 400 private/ca.key.pem
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
